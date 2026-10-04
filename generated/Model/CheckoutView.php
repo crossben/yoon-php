@@ -1,6 +1,6 @@
 <?php
 /**
- * CreatePaymentRequest
+ * CheckoutView
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Yoon\Generated\ObjectSerializer;
 
 /**
- * CreatePaymentRequest Class Doc Comment
+ * CheckoutView Class Doc Comment
  *
  * @category Class
+ * @description What the hosted checkout page shows. Holds no secret and no other object.
  * @package  Yoon\Generated
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutView implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreatePaymentRequest';
+    protected static $openAPIModelName = 'CheckoutView';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +58,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
+        'id' => 'string',
+        'status' => '\Yoon\Generated\Model\PaymentStatus',
         'amount' => 'int',
         'currency' => 'string',
         'country' => 'string',
-        'method' => 'string',
-        'checkout' => 'string',
-        'customer' => '\Yoon\Generated\Model\CreatePaymentRequestCustomer',
-        'reference' => 'string',
         'description' => 'string',
+        'method' => 'string',
+        'methods' => '\Yoon\Generated\Model\CheckoutViewMethodsInner[]',
+        'can_choose' => 'bool',
+        'next_action' => '\Yoon\Generated\Model\CheckoutViewNextAction',
+        'customer_phone' => 'string',
+        'has_pi_alias' => 'bool',
         'return_url' => 'string',
-        'provider' => 'string'
+        'expires_at' => '\DateTime',
+        'last_error' => '\Yoon\Generated\Model\CheckoutViewLastError'
     ];
 
     /**
@@ -77,16 +83,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => null,
+        'status' => null,
         'amount' => 'int64',
         'currency' => null,
         'country' => null,
-        'method' => null,
-        'checkout' => null,
-        'customer' => null,
-        'reference' => null,
         'description' => null,
-        'return_url' => 'uri',
-        'provider' => null
+        'method' => null,
+        'methods' => null,
+        'can_choose' => null,
+        'next_action' => null,
+        'customer_phone' => null,
+        'has_pi_alias' => null,
+        'return_url' => null,
+        'expires_at' => 'date-time',
+        'last_error' => null
     ];
 
     /**
@@ -95,16 +106,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'id' => false,
+        'status' => false,
         'amount' => false,
         'currency' => false,
         'country' => false,
-        'method' => false,
-        'checkout' => false,
-        'customer' => false,
-        'reference' => false,
-        'description' => false,
-        'return_url' => false,
-        'provider' => false
+        'description' => true,
+        'method' => true,
+        'methods' => false,
+        'can_choose' => false,
+        'next_action' => false,
+        'customer_phone' => true,
+        'has_pi_alias' => false,
+        'return_url' => true,
+        'expires_at' => true,
+        'last_error' => false
     ];
 
     /**
@@ -193,16 +209,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
+        'status' => 'status',
         'amount' => 'amount',
         'currency' => 'currency',
         'country' => 'country',
-        'method' => 'method',
-        'checkout' => 'checkout',
-        'customer' => 'customer',
-        'reference' => 'reference',
         'description' => 'description',
+        'method' => 'method',
+        'methods' => 'methods',
+        'can_choose' => 'can_choose',
+        'next_action' => 'next_action',
+        'customer_phone' => 'customer_phone',
+        'has_pi_alias' => 'has_pi_alias',
         'return_url' => 'return_url',
-        'provider' => 'provider'
+        'expires_at' => 'expires_at',
+        'last_error' => 'last_error'
     ];
 
     /**
@@ -211,16 +232,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
+        'status' => 'setStatus',
         'amount' => 'setAmount',
         'currency' => 'setCurrency',
         'country' => 'setCountry',
-        'method' => 'setMethod',
-        'checkout' => 'setCheckout',
-        'customer' => 'setCustomer',
-        'reference' => 'setReference',
         'description' => 'setDescription',
+        'method' => 'setMethod',
+        'methods' => 'setMethods',
+        'can_choose' => 'setCanChoose',
+        'next_action' => 'setNextAction',
+        'customer_phone' => 'setCustomerPhone',
+        'has_pi_alias' => 'setHasPiAlias',
         'return_url' => 'setReturnUrl',
-        'provider' => 'setProvider'
+        'expires_at' => 'setExpiresAt',
+        'last_error' => 'setLastError'
     ];
 
     /**
@@ -229,16 +255,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
+        'status' => 'getStatus',
         'amount' => 'getAmount',
         'currency' => 'getCurrency',
         'country' => 'getCountry',
-        'method' => 'getMethod',
-        'checkout' => 'getCheckout',
-        'customer' => 'getCustomer',
-        'reference' => 'getReference',
         'description' => 'getDescription',
+        'method' => 'getMethod',
+        'methods' => 'getMethods',
+        'can_choose' => 'getCanChoose',
+        'next_action' => 'getNextAction',
+        'customer_phone' => 'getCustomerPhone',
+        'has_pi_alias' => 'getHasPiAlias',
         'return_url' => 'getReturnUrl',
-        'provider' => 'getProvider'
+        'expires_at' => 'getExpiresAt',
+        'last_error' => 'getLastError'
     ];
 
     /**
@@ -282,21 +313,6 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
-    public const CHECKOUT_DIRECT = 'direct';
-    public const CHECKOUT_HOSTED = 'hosted';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getCheckoutAllowableValues()
-    {
-        return [
-            self::CHECKOUT_DIRECT,
-            self::CHECKOUT_HOSTED,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -313,16 +329,21 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('country', $data ?? [], null);
-        $this->setIfExists('method', $data ?? [], null);
-        $this->setIfExists('checkout', $data ?? [], 'direct');
-        $this->setIfExists('customer', $data ?? [], null);
-        $this->setIfExists('reference', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('method', $data ?? [], null);
+        $this->setIfExists('methods', $data ?? [], null);
+        $this->setIfExists('can_choose', $data ?? [], null);
+        $this->setIfExists('next_action', $data ?? [], null);
+        $this->setIfExists('customer_phone', $data ?? [], null);
+        $this->setIfExists('has_pi_alias', $data ?? [], null);
         $this->setIfExists('return_url', $data ?? [], null);
-        $this->setIfExists('provider', $data ?? [], null);
+        $this->setIfExists('expires_at', $data ?? [], null);
+        $this->setIfExists('last_error', $data ?? [], null);
     }
 
     /**
@@ -352,52 +373,51 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
         if ($this->container['amount'] === null) {
             $invalidProperties[] = "'amount' can't be null";
         }
-        if (($this->container['amount'] < 1)) {
-            $invalidProperties[] = "invalid value for 'amount', must be bigger than or equal to 1.";
-        }
-
         if ($this->container['currency'] === null) {
             $invalidProperties[] = "'currency' can't be null";
         }
-        if (!preg_match("/^[A-Z]{3}$/", $this->container['currency'])) {
-            $invalidProperties[] = "invalid value for 'currency', must be conform to the pattern /^[A-Z]{3}$/.";
-        }
-
         if ($this->container['country'] === null) {
             $invalidProperties[] = "'country' can't be null";
         }
-        if (!preg_match("/^[A-Z]{2}$/", $this->container['country'])) {
-            $invalidProperties[] = "invalid value for 'country', must be conform to the pattern /^[A-Z]{2}$/.";
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
         }
-
-        if (!is_null($this->container['method']) && (mb_strlen($this->container['method']) > 32)) {
-            $invalidProperties[] = "invalid value for 'method', the character length must be smaller than or equal to 32.";
+        if ($this->container['method'] === null) {
+            $invalidProperties[] = "'method' can't be null";
         }
-
-        $allowedValues = $this->getCheckoutAllowableValues();
-        if (!is_null($this->container['checkout']) && !in_array($this->container['checkout'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'checkout', must be one of '%s'",
-                $this->container['checkout'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['methods'] === null) {
+            $invalidProperties[] = "'methods' can't be null";
         }
-
-        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 255)) {
-            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 255.";
+        if ($this->container['can_choose'] === null) {
+            $invalidProperties[] = "'can_choose' can't be null";
         }
-
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 500)) {
-            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 500.";
+        if ($this->container['next_action'] === null) {
+            $invalidProperties[] = "'next_action' can't be null";
         }
-
-        if (!is_null($this->container['return_url']) && (mb_strlen($this->container['return_url']) > 2048)) {
-            $invalidProperties[] = "invalid value for 'return_url', the character length must be smaller than or equal to 2048.";
+        if ($this->container['customer_phone'] === null) {
+            $invalidProperties[] = "'customer_phone' can't be null";
         }
-
+        if ($this->container['has_pi_alias'] === null) {
+            $invalidProperties[] = "'has_pi_alias' can't be null";
+        }
+        if ($this->container['return_url'] === null) {
+            $invalidProperties[] = "'return_url' can't be null";
+        }
+        if ($this->container['expires_at'] === null) {
+            $invalidProperties[] = "'expires_at' can't be null";
+        }
+        if ($this->container['last_error'] === null) {
+            $invalidProperties[] = "'last_error' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -412,6 +432,60 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string $id id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return \Yoon\Generated\Model\PaymentStatus
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param \Yoon\Generated\Model\PaymentStatus $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
 
     /**
      * Gets amount
@@ -435,11 +509,6 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         if (is_null($amount)) {
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
-
-        if (($amount < 1)) {
-            throw new \InvalidArgumentException('invalid value for $amount when calling CreatePaymentRequest., must be bigger than or equal to 1.');
-        }
-
         $this->container['amount'] = $amount;
 
         return $this;
@@ -467,11 +536,6 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         if (is_null($currency)) {
             throw new \InvalidArgumentException('non-nullable currency cannot be null');
         }
-
-        if ((!preg_match("/^[A-Z]{3}$/", ObjectSerializer::toString($currency)))) {
-            throw new \InvalidArgumentException("invalid value for \$currency when calling CreatePaymentRequest., must conform to the pattern /^[A-Z]{3}$/.");
-        }
-
         $this->container['currency'] = $currency;
 
         return $this;
@@ -499,138 +563,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         if (is_null($country)) {
             throw new \InvalidArgumentException('non-nullable country cannot be null');
         }
-
-        if ((!preg_match("/^[A-Z]{2}$/", ObjectSerializer::toString($country)))) {
-            throw new \InvalidArgumentException("invalid value for \$country when calling CreatePaymentRequest., must conform to the pattern /^[A-Z]{2}$/.");
-        }
-
         $this->container['country'] = $country;
-
-        return $this;
-    }
-
-    /**
-     * Gets method
-     *
-     * @return string|null
-     */
-    public function getMethod()
-    {
-        return $this->container['method'];
-    }
-
-    /**
-     * Sets method
-     *
-     * @param string|null $method e.g. wave, orange_money, free_money, card, pispi. Required unless `checkout` is `hosted`; with `hosted` it limits the checkout page to this one method.
-     *
-     * @return self
-     */
-    public function setMethod($method)
-    {
-        if (is_null($method)) {
-            throw new \InvalidArgumentException('non-nullable method cannot be null');
-        }
-        if ((mb_strlen($method) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $method when calling CreatePaymentRequest., must be smaller than or equal to 32.');
-        }
-
-        $this->container['method'] = $method;
-
-        return $this;
-    }
-
-    /**
-     * Gets checkout
-     *
-     * @return string|null
-     */
-    public function getCheckout()
-    {
-        return $this->container['checkout'];
-    }
-
-    /**
-     * Sets checkout
-     *
-     * @param string|null $checkout `direct` (default): Yoon calls a provider now. `hosted`: Yoon calls no provider yet and returns `checkout_url`, a Yoon page where the customer picks the method (ADR-0024).
-     *
-     * @return self
-     */
-    public function setCheckout($checkout)
-    {
-        if (is_null($checkout)) {
-            throw new \InvalidArgumentException('non-nullable checkout cannot be null');
-        }
-        $allowedValues = $this->getCheckoutAllowableValues();
-        if (!in_array($checkout, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'checkout', must be one of '%s'",
-                    $checkout,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['checkout'] = $checkout;
-
-        return $this;
-    }
-
-    /**
-     * Gets customer
-     *
-     * @return \Yoon\Generated\Model\CreatePaymentRequestCustomer|null
-     */
-    public function getCustomer()
-    {
-        return $this->container['customer'];
-    }
-
-    /**
-     * Sets customer
-     *
-     * @param \Yoon\Generated\Model\CreatePaymentRequestCustomer|null $customer customer
-     *
-     * @return self
-     */
-    public function setCustomer($customer)
-    {
-        if (is_null($customer)) {
-            throw new \InvalidArgumentException('non-nullable customer cannot be null');
-        }
-        $this->container['customer'] = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Gets reference
-     *
-     * @return string|null
-     */
-    public function getReference()
-    {
-        return $this->container['reference'];
-    }
-
-    /**
-     * Sets reference
-     *
-     * @param string|null $reference Your own order id.
-     *
-     * @return self
-     */
-    public function setReference($reference)
-    {
-        if (is_null($reference)) {
-            throw new \InvalidArgumentException('non-nullable reference cannot be null');
-        }
-        if ((mb_strlen($reference) > 255)) {
-            throw new \InvalidArgumentException('invalid length for $reference when calling CreatePaymentRequest., must be smaller than or equal to 255.');
-        }
-
-        $this->container['reference'] = $reference;
 
         return $this;
     }
@@ -638,7 +571,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets description
      *
-     * @return string|null
+     * @return string
      */
     public function getDescription()
     {
@@ -648,20 +581,199 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string $description description
      *
      * @return self
      */
     public function setDescription($description)
     {
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        if ((mb_strlen($description) > 500)) {
-            throw new \InvalidArgumentException('invalid length for $description when calling CreatePaymentRequest., must be smaller than or equal to 500.');
-        }
-
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->container['method'];
+    }
+
+    /**
+     * Sets method
+     *
+     * @param string $method The method chosen last.
+     *
+     * @return self
+     */
+    public function setMethod($method)
+    {
+        if (is_null($method)) {
+            array_push($this->openAPINullablesSetToNull, 'method');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('method', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['method'] = $method;
+
+        return $this;
+    }
+
+    /**
+     * Gets methods
+     *
+     * @return \Yoon\Generated\Model\CheckoutViewMethodsInner[]
+     */
+    public function getMethods()
+    {
+        return $this->container['methods'];
+    }
+
+    /**
+     * Sets methods
+     *
+     * @param \Yoon\Generated\Model\CheckoutViewMethodsInner[] $methods methods
+     *
+     * @return self
+     */
+    public function setMethods($methods)
+    {
+        if (is_null($methods)) {
+            throw new \InvalidArgumentException('non-nullable methods cannot be null');
+        }
+        $this->container['methods'] = $methods;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_choose
+     *
+     * @return bool
+     */
+    public function getCanChoose()
+    {
+        return $this->container['can_choose'];
+    }
+
+    /**
+     * Sets can_choose
+     *
+     * @param bool $can_choose True while the customer may start an attempt.
+     *
+     * @return self
+     */
+    public function setCanChoose($can_choose)
+    {
+        if (is_null($can_choose)) {
+            throw new \InvalidArgumentException('non-nullable can_choose cannot be null');
+        }
+        $this->container['can_choose'] = $can_choose;
+
+        return $this;
+    }
+
+    /**
+     * Gets next_action
+     *
+     * @return \Yoon\Generated\Model\CheckoutViewNextAction
+     */
+    public function getNextAction()
+    {
+        return $this->container['next_action'];
+    }
+
+    /**
+     * Sets next_action
+     *
+     * @param \Yoon\Generated\Model\CheckoutViewNextAction $next_action next_action
+     *
+     * @return self
+     */
+    public function setNextAction($next_action)
+    {
+        if (is_null($next_action)) {
+            throw new \InvalidArgumentException('non-nullable next_action cannot be null');
+        }
+        $this->container['next_action'] = $next_action;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_phone
+     *
+     * @return string
+     */
+    public function getCustomerPhone()
+    {
+        return $this->container['customer_phone'];
+    }
+
+    /**
+     * Sets customer_phone
+     *
+     * @param string $customer_phone Masked.
+     *
+     * @return self
+     */
+    public function setCustomerPhone($customer_phone)
+    {
+        if (is_null($customer_phone)) {
+            array_push($this->openAPINullablesSetToNull, 'customer_phone');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_phone', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['customer_phone'] = $customer_phone;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_pi_alias
+     *
+     * @return bool
+     */
+    public function getHasPiAlias()
+    {
+        return $this->container['has_pi_alias'];
+    }
+
+    /**
+     * Sets has_pi_alias
+     *
+     * @param bool $has_pi_alias has_pi_alias
+     *
+     * @return self
+     */
+    public function setHasPiAlias($has_pi_alias)
+    {
+        if (is_null($has_pi_alias)) {
+            throw new \InvalidArgumentException('non-nullable has_pi_alias cannot be null');
+        }
+        $this->container['has_pi_alias'] = $has_pi_alias;
 
         return $this;
     }
@@ -669,7 +781,7 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets return_url
      *
-     * @return string|null
+     * @return string
      */
     public function getReturnUrl()
     {
@@ -679,47 +791,84 @@ class CreatePaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets return_url
      *
-     * @param string|null $return_url return_url
+     * @param string $return_url The application's page to go back to.
      *
      * @return self
      */
     public function setReturnUrl($return_url)
     {
         if (is_null($return_url)) {
-            throw new \InvalidArgumentException('non-nullable return_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'return_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('return_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        if ((mb_strlen($return_url) > 2048)) {
-            throw new \InvalidArgumentException('invalid length for $return_url when calling CreatePaymentRequest., must be smaller than or equal to 2048.');
-        }
-
         $this->container['return_url'] = $return_url;
 
         return $this;
     }
 
     /**
-     * Gets provider
+     * Gets expires_at
      *
-     * @return string|null
+     * @return \DateTime
      */
-    public function getProvider()
+    public function getExpiresAt()
     {
-        return $this->container['provider'];
+        return $this->container['expires_at'];
     }
 
     /**
-     * Sets provider
+     * Sets expires_at
      *
-     * @param string|null $provider Optional: pin a configured provider instead of routing.
+     * @param \DateTime $expires_at expires_at
      *
      * @return self
      */
-    public function setProvider($provider)
+    public function setExpiresAt($expires_at)
     {
-        if (is_null($provider)) {
-            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        if (is_null($expires_at)) {
+            array_push($this->openAPINullablesSetToNull, 'expires_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expires_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['provider'] = $provider;
+        $this->container['expires_at'] = $expires_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_error
+     *
+     * @return \Yoon\Generated\Model\CheckoutViewLastError
+     */
+    public function getLastError()
+    {
+        return $this->container['last_error'];
+    }
+
+    /**
+     * Sets last_error
+     *
+     * @param \Yoon\Generated\Model\CheckoutViewLastError $last_error last_error
+     *
+     * @return self
+     */
+    public function setLastError($last_error)
+    {
+        if (is_null($last_error)) {
+            throw new \InvalidArgumentException('non-nullable last_error cannot be null');
+        }
+        $this->container['last_error'] = $last_error;
 
         return $this;
     }
